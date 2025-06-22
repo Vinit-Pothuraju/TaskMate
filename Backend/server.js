@@ -2,6 +2,7 @@ import express from "express";
 import dotenv from "dotenv";
 import connectDB from "./Config/db.js"; 
 import AuthRoute from "./Routes/Auth.route.js";
+import TodoRoute from "./Routes/Todo.route.js";
 
 dotenv.config();
 
@@ -11,10 +12,11 @@ const PORT = process.env.PORT || 5000;
 
 app.use(express.json());
 app.use('/api/auth',AuthRoute)
+app.use('/api/',TodoRoute)
 // app.use('/api/user',UserRoute)
 
 app.get("/", (req, res) => {
-  res.send("CheckMate API is running ✅");
+  res.send("TaskMate API is running ✅");
 }); 
 
 

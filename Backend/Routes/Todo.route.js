@@ -1,12 +1,14 @@
-import express from 'express'
+import express from 'express';
+import { ensureAuthenticated } from '../Middlewares/Auth.middleware.js';
+
+import { createTodo, deleteTodo, getAllTodos, updateTodo } from '../Controllers/Todos.controller.js';
+
+const TodoRoute = express.Router();
 
 
-const TodoRoute=express.Router();
-TodoRoute.get('/Todos',AllTodos)
-TodoRoute.post('/Todos',createTodo)
-TodoRoute.put('/Todos',updateTodo)
-TodoRoute.delete('/Todos',DeleteTodo)
-
-
+TodoRoute.get('/todos', ensureAuthenticated, getAllTodos);            
+TodoRoute.post('/todos', ensureAuthenticated, createTodo);         
+TodoRoute.put('/todos/:id', ensureAuthenticated, updateTodo);     
+TodoRoute.delete('/todos/:id', ensureAuthenticated, deleteTodo);  
 
 export default TodoRoute;
